@@ -68,3 +68,140 @@
 |1. 音素层的口语测评：声希科技独家MDD评测系统，模拟真人老师，不仅告诉用户读错了，而且从音素层面（声标中）标记出用户是什么错的，支持单词和句子评测，提供美音，英音，混合口语评测。|1. 标准流利的英语范读：专业级的api，生成的英语泛读准确度和专业度俱佳。|
 |2. 三种严格程度：有宽松、中等、严格三种测评的严格度，满足不同口语水平的用户。|2. 多重选择：具有男生和女生的选择，满足不同性别的用户群体。具有英式发音和美式发音的选择，满足用户对不同发音的需求。|
 |3. 三大维度：含有完整度，准确度，流利度三大维度的测评。|3. 文本的语音合成：能够满足千变万化的句子朗读，具有很强的时效性和即时性。|
+
+
+|||
+|--|--|
+|请求示例|import requests
+
+url = "https://ali01.io.speechx.cn/MDD_Phone"
+
+payload = "englishType=1&englishLevel=0&word=hello&url=https%3A%2F%2Fdictionary.cambridge.org%2Fmedia%2Fenglish%2Fuk_pron%2Fu%2Fukh%2Fukhef%2Fukheft_029.mp3"
+headers = {
+    'Authorization': "APPCODE d52d3bfe0d61470f88ae60baf618081e",
+    'Content-Type': "application/x-www-form-urlencoded",
+    'cache-control': "no-cache",
+    'Postman-Token': "ad168a56-10da-48a6-818f-493548212d3d"
+    }
+
+response = requests.request("POST", url, data=payload, headers=headers)
+
+print(response.text)|
+|正常返回示例|{
+  "score": "8.8",
+  "detail_score": {
+    "integrity": "10.0",
+    "segment": "9.2",
+    "fluency": "7.1",
+    "overall": "8.8"
+  },
+  "words": [
+    {
+      "score": "9.2",
+      "start": 340,
+      "name": "dune",
+      "end": 1140,
+      "mdd": "Correct",
+      "syllables": [
+        {
+          "score": "8.9",
+          "stress_dict": 0,
+          "name": "d y uw1 n",
+          "phones": [
+            {
+              "score": "10.0",
+              "rec": "d",
+              "prob_rec": 0.881,
+              "dict": "d",
+              "type": "Correct",
+              "prob_dict": 0.881,
+              "n_best_rec": [
+                {
+                  "prob_rec": 0.173,
+                  "name": "g",
+                  "index": 1
+                },
+                {
+                  "prob_rec": 0.157,
+                  "name": "t",
+                  "index": 2
+                }
+              ]
+            },
+            {
+              "score": "7.4",
+              "rec": "y",
+              "prob_rec": 0.325,
+              "dict": "y",
+              "type": "Correct",
+              "prob_dict": 0.325,
+              "n_best_rec": [
+                {
+                  "prob_rec": 0.143,
+                  "name": "t",
+                  "index": 1
+                }
+              ]
+            },
+            {
+              "score": "10.0",
+              "rec": "uw",
+              "prob_rec": 0.94,
+              "dict": "uw",
+              "type": "Correct",
+              "prob_dict": 0.94
+            },
+            {
+              "score": "7.3",
+              "rec": "n",
+              "prob_rec": 0.517,
+              "dict": "n",
+              "type": "Correct",
+              "prob_dict": 0.517
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "user": {
+    "english_level": "Elementary",
+    "accent_type": "GB_or_US",
+    "feed_back_type": "MDD_Phone",
+    "user_id": "guest"
+  },
+  "utter_info": {
+    "intensity": {
+      "min": 0,
+      "max": 22.78,
+      "mean": 17.47
+    },
+    "ref_text": "dune",
+    "response_time": "2019-04-09 12:05:27",
+    "utterance_id": "dune_dune_fage_1531366680_1554782727451",
+    "api_version": "0.110.08.2019.03.20.05"
+  }
+}
+|
+|失败返回示例|{
+  "err_code": 2010,
+  "err_info": "Error In Audio File!",
+  "user": {
+    "english_level": "Elementary",
+    "accent_type": "GB_or_US",
+    "feed_back_type": "MDD_Phone",
+    "user_id": "guest"
+  },
+  "utter_info": {
+    "intensity": {
+      "min": 0,
+      "max": 0,
+      "mean": 0
+    },
+    "ref_text": "dune",
+    "response_time": "2019-04-09 12:04:46",
+    "utterance_id": "dune_dune_fage_1531366680_1554782686365",
+    "api_version": "0.110.08.2019.03.20.05"
+  }
+}|
+
