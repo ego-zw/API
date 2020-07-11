@@ -70,9 +70,9 @@
 |3. 三大维度：含有完整度，准确度，流利度三大维度的测评。|3. 文本的语音合成：能够满足千变万化的句子朗读，具有很强的时效性和即时性。|
 
 
-|||
-|--|--|
-|请求示例|import requests
+|示例|代码|
+|:--:|:--:|
+|请求示例| import requests
 
 url = "https://ali01.io.speechx.cn/MDD_Phone"
 
@@ -86,8 +86,8 @@ headers = {
 
 response = requests.request("POST", url, data=payload, headers=headers)
 
-print(response.text)|
-|正常返回示例|{
+print(response.text) |
+|正常返回示例| {
   "score": "8.8",
   "detail_score": {
     "integrity": "10.0",
@@ -181,9 +181,8 @@ print(response.text)|
     "utterance_id": "dune_dune_fage_1531366680_1554782727451",
     "api_version": "0.110.08.2019.03.20.05"
   }
-}
-|
-|失败返回示例|{
+} |
+|失败返回示例| {
   "err_code": 2010,
   "err_info": "Error In Audio File!",
   "user": {
@@ -203,5 +202,5 @@ print(response.text)|
     "utterance_id": "dune_dune_fage_1531366680_1554782686365",
     "api_version": "0.110.08.2019.03.20.05"
   }
-}|
+} |
 
